@@ -17,14 +17,6 @@ use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::post('/register', [RegisteredUserController::class, 'store']);
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-Route::post('/forgot-password', [PasswordResetLinkController::class, 'store']);
-Route::post('/reset-password', [NewPasswordController::class, 'store']);
-Route::post('/confirm-password', [PasswordConfirmationController::class, 'store']);
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
