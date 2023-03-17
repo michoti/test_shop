@@ -30,6 +30,8 @@ Route::prefix('/cart')->group(function () {
     Route::put('/updated-quantity/{product:id}', [CartController::class, 'updateQuantity']);
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/user', function (Request $request) {
     return $request->user();
 });
