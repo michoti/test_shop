@@ -60,9 +60,13 @@ class Cart
     {
         $request = \request();
         $cartItems = self::getCookieCartItems();
+        // Log::debug($cartItems);
         $dbCartItems = CartItem::where(['user_id' => $request->user()->id])->get()->keyBy('product_id');
+        Log::info("********************  Db cart items    **************************");
+        Log::debug($dbCartItems);
+
         $newCartItems = [];
-        Log::debug($cartItems);
+        
         foreach ($cartItems as $cartItem) {
             if (isset($dbCartItems[$cartItem['product_id']])) {
                 continue;
@@ -73,6 +77,9 @@ class Cart
                 'quantity' => $cartItem['quantity'],
             ];
         }
+
+        Log::info("********************  Newly formed cart items array   **************************");
+        Log::debug($newCartItems);
 
         if (!empty($newCartItems)) {
             CartItem::insert($newCartItems);
